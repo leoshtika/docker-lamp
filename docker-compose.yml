@@ -1,0 +1,40 @@
+version: "3"
+services:
+    www:
+        build: .
+        ports: 
+            - "80:80"
+        volumes:
+            - ./www:/var/www/html/
+        links:
+            - db
+        networks:
+            - default
+    db:
+        image: mysql:5.7
+        ports: 
+            - "3306:3306"
+        command: mysqld --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_DATABASE: appdb
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: pass123
+            MYSQL_ROOT_PASSWORD: pass!123456
+        volumes:
+            - ./sql-dump:/docker-entrypoint-initdb.d
+            - ./mysql-conf:/etc/mysql/conf.d
+            - mysql-data:/var/lib/mysql
+        networks:
+            - default
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links: 
+            - db:db
+        ports:
+            - 8888:80
+        environment:
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: pass123
+            MYSQL_ROOT_PASSWORD: pass!123456 
+volumes:
+    mysql-data:
