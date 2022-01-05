@@ -19,7 +19,7 @@ services:
 
     db:
         build:
-            context: ./docker-bin/mysql
+            context: ./docker-bin/mariadb
         container_name: '${PROJECT_KEY}-db'
         restart: 'unless-stopped'
         ports:
