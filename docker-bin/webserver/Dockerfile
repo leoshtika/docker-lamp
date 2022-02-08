@@ -78,7 +78,7 @@ RUN rm -rf /usr/src/*
 # Fix permission issues
 # Create a non-root user called 'myuser' in container and set the user id and group id same as host's
 RUN if [ ! $(getent group ${GID}) ]; then \
-        addgroup --gid ${GID} tessera; \
+        addgroup --gid ${GID} myuser; \
     fi
 RUN adduser --disabled-password --gecos '' --uid ${UID} --gid ${GID} myuser
 
