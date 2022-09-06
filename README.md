@@ -1,6 +1,8 @@
 docker-lamp
 ===========
-A simple LAMP (Linux, Apache, MySQL/MariaDB, PHP) using Docker containers
+A simple LAMP (Linux, Apache, MySQL/MariaDB, PHP) using Docker containers. 
+The master branch has the latest supported versions. 
+Select a different branch for older versions of PHP.
 
 Usage
 -----

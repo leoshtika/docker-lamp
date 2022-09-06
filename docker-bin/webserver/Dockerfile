@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:8.0-apache
 
 # Get user id and group id from arguments
 ARG UID
@@ -35,7 +35,7 @@ RUN apt-get -y update && \
 COPY --from=composer:2.1 /usr/bin/composer /usr/local/bin/composer
 
 # Install xdebug
-RUN pecl install xdebug-2.8.0 && \
+RUN pecl install xdebug-3.1.5 && \
     docker-php-ext-enable xdebug
 
 # Other PHP7 Extensions
@@ -44,7 +44,6 @@ RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install curl && \
     docker-php-ext-install tokenizer && \
-    docker-php-ext-install json && \
     docker-php-ext-install zip && \
     docker-php-ext-install -j$(nproc) intl && \
     docker-php-ext-install mbstring && \
