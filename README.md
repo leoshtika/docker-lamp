@@ -6,7 +6,7 @@ Select a different branch for older versions of PHP.
 
 Usage
 -----
-1) Make sure you have installed [Git](https://git-scm.com/downloads), [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/). For linux see [Post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/) to manage Docker as a non-root user
+1) Make sure you have installed [Git](https://git-scm.com/downloads), [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/). For linux install [Docker Engine Server](https://docs.docker.com/engine/install/#server) and see [Post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/) to manage Docker as a non-root user
 
 2) Configure environment variables in Docker Compose
 ```shell
