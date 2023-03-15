@@ -23,8 +23,8 @@ id -g # If the result is different from 1000, replace the GID value in the .env 
 
 3) Build and run all containers
 ```shell
-docker-compose build
-docker-compose up -d
+docker compose build
+docker compose up -d
 ```
 
 4) Test
