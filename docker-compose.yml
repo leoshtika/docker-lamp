@@ -30,7 +30,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
 
   pma:
-    image: phpmyadmin:5.1
+    image: phpmyadmin:5.2.0
     container_name: '${PROJECT_KEY}-pma'
     restart: 'unless-stopped'
     ports:
