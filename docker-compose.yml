@@ -8,6 +8,9 @@ services:
       args:
         UID: ${UID}
         GID: ${GID}
+        UPLOAD_LIMIT: ${UPLOAD_LIMIT}
+        MEMORY_LIMIT: ${MEMORY_LIMIT}
+        MAX_EXECUTION_TIME: ${MAX_EXECUTION_TIME}
     container_name: '${PROJECT_KEY}-web'
     restart: 'unless-stopped'
     ports:
@@ -37,7 +40,7 @@ services:
       - '${HOST_PMA_PORT}:80'
     environment:
       PMA_HOST: db
-      UPLOAD_LIMIT: 512M
+      UPLOAD_LIMIT: ${UPLOAD_LIMIT}
 
 volumes:
   db-data:

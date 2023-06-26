@@ -1,8 +1,13 @@
-FROM php:8.0-apache
+FROM php:8.2-apache
 
 # Get user id and group id from arguments
 ARG UID
 ARG GID
+
+# Get the upload related arguments
+ARG UPLOAD_LIMIT
+ARG MEMORY_LIMIT
+ARG MAX_EXECUTION_TIME
 
 # Update
 RUN apt-get -y update --fix-missing && \
@@ -32,22 +37,26 @@ RUN apt-get -y update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Composer
-COPY --from=composer:2.1 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.2 /usr/bin/composer /usr/local/bin/composer
 
 # Install xdebug
-RUN pecl install xdebug-3.1.5 && \
+RUN pecl install xdebug-3.2.0 && \
     docker-php-ext-enable xdebug
 
-# Other PHP7 Extensions
+# Other PHP8 Extensions
 RUN docker-php-ext-install pdo_mysql && \
-    docker-php-ext-install pdo_sqlite && \
     docker-php-ext-install mysqli && \
-    docker-php-ext-install curl && \
-    docker-php-ext-install tokenizer && \
     docker-php-ext-install zip && \
     docker-php-ext-install -j$(nproc) intl && \
-    docker-php-ext-install mbstring && \
     docker-php-ext-install gettext
+
+# Create an uploads related configuration file
+ARG UPLOAD_CONFIG_PATH=/usr/local/etc/php/conf.d/uploads.ini
+RUN touch ${UPLOAD_CONFIG_PATH} \
+    && echo "upload_max_filesize = ${UPLOAD_LIMIT}" >> ${UPLOAD_CONFIG_PATH} \
+    && echo "post_max_size = ${UPLOAD_LIMIT}" >> ${UPLOAD_CONFIG_PATH} \
+    && echo "max_execution_time = ${MAX_EXECUTION_TIME}" >> ${UPLOAD_CONFIG_PATH} \
+    && echo "memory_limit = ${MEMORY_LIMIT}" >> ${UPLOAD_CONFIG_PATH}
 
 # Install Freetype
 RUN apt-get -y update && \
