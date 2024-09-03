@@ -1,34 +1,34 @@
-docker-lamp
-===========
-A simple LAMP (Linux, Apache, MySQL/MariaDB, PHP) using Docker containers. 
-The master branch has the latest supported versions. 
-Select a different branch for older versions of PHP.
+# Docker LAMP
+A lightweight LAMP (Linux, Apache, MySQL/MariaDB, PHP) stack using Docker. The `master` branch contains the latest supported versions of each component. To use older PHP versions, please check the respective branches.
 
-Usage
------
-1) Make sure you have installed [Git](https://git-scm.com/downloads). Then,
-- for **Linux** install [Docker Engine Server](https://docs.docker.com/engine/install/#server) (**not** Docker *Desktop*) and see [Post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/) to manage Docker as a non-root user.
-- for **macOS** install [Docker Desktop for Mac (macOS)](https://docs.docker.com/desktop/install/mac-install/)
-- for **Windows** install [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/)
+## Usage
+### 1) Prerequisites
+Ensure that you have [Git](https://git-scm.com/downloads) installed, then follow the steps below based on your operating system:
 
-2) Configure environment variables in Docker Compose
-```shell
+- **Linux**: Install the [Docker Engine](https://docs.docker.com/engine/install/#server) (**not** Docker *Desktop*) and follow the [post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/) to manage Docker as a non-root user.
+- **macOS**: Install [Docker Desktop for Mac](https://docs.docker.com/desktop/install/mac-install/).
+- **Windows**: Install [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/).
+
+### 2) Set up environment variables
+Copy the sample environment file and adjust the user and group IDs if necessary:
+```bash
 cp .env.sample .env
-```
-```shell
-# For Unix-like machines (Linux and Mac)
-id -u # If the result is different from 1000, replace the UID value in the .env file
-id -g # If the result is different from 1000, replace the GID value in the .env file
-```
+````
 
-3) Build and run all containers
-```shell
+For Unix-like systems (Linux and macOS) run:
+```bash
+id -u # If the output is different from 1000, update the UID in the .env file.
+id -g # If the output is different from 1000, update the GID in the .env file.
+````
+### 3) Build and start containers
+To build and start the Docker containers, run:
+```bash
 docker compose build
 docker compose up -d
 ```
 
-4) Test
-- Web -> [http://localhost:4001](http://localhost:4001)
-- Phpmyadmin -> [http://localhost:4003](http://localhost:4003) (username: root, password: pass123)
+### 4) Access the services
+- Web server: [http://localhost:4001](http://localhost:4001)
+- phpMyAdmin: [http://localhost:4003](http://localhost:4003) (username: root, password: pass123)
 
 Enjoy!
